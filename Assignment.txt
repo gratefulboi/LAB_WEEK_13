@@ -1,0 +1,20 @@
+Bryan 90122
+
+1. MVVM (Model-View-ViewModel) penting karena menerapkan prinsip Separation of Concerns (Pemisahan Tanggung Jawab). Ini memisahkan tampilan antarmuka (UI) dari logika bisnis dan data. 
+- Model : Movie.kt (Mewakili data dan logika bisnis.)
+- View : MainActivity.kt, MovieAdapter.kt, activity_main.xml, view_movie_item.xml (Mewakili tampilan UI yang dilihat pengguna.)
+- ViewModel: ModelViewModel.kt (Jembatan antara Model dan View, menyimpan data untuk UI.)
+
+2. Metode Data Binding lebih efisien karena 
+-Mengurangi Kode Berulang (Boilerplate)
+-Data Binding membuat objek pengikat saat kompilasi (compile time) yang memetakan view langsung ke variabel, sehingga sedikit lebih cepat saat eksekusi.
+- UI Deklaratif dengan menghubungkan data langsung di XML
+
+3. Singleton penting karena untuk menghemat resource serta memastikan hanya ada satu koneksi yang terbuka dalam satu waktu. mencegah race condition dan memory leak.
+
+4. Repository Pattern penting karena Abstraksi & Sentralisasi Data. Bertindak sebagai perantara (middleman) antara ViewModel dan Sumber Data (API dan Database Lokal).
+
+5. Menggunakan WorkManager adalah standar modern karena menjamin eksekusi (bahkan jika HP direstart) dan optimasi baterai sistem (Doze mode), ada beberapa cara lain seperti
+-Lifecycle-Scoped Coroutines
+-AlarmManager
+-Foreground Service
