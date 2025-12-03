@@ -1,5 +1,6 @@
 package com.example.lab_week_13
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lab_week_13.api.MovieService
@@ -53,5 +54,20 @@ class MovieRepository(private val movieService: MovieService,
 
            // Pake dispatcher.io untuk menjalankan coroutine ini di sharedpool of threads
        }.flowOn(Dispatchers.IO)
+    }
+
+    // Fetch movie dari API dan save di database. Function ini dipakai setiap interval untuk refresh list of popular movies
+    suspend fun fetchMoviesFromNetwork() {
+        val movieDao: MovieDao = movieDatabase.movieDao()
+        try {
+            val popularMovies = movieService.getPopularMovies(apiKey)
+            val moviesFetched = popularMovies.results
+            movieDao.addMovies(moviesFetched)
+        } catch (exception: Exception) {
+            Log.d(
+                "MovieRepository",
+                "An error occured: ${exception.message}"
+            )
+        }
     }
 }
